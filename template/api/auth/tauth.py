@@ -65,10 +65,6 @@ class TAuthProtocal(object):
         tcloud_url = self._conf["tauth_url"]
         body = self._make_cst()
         kwargs = dict(body=body)
-
-        if not self._conf["auth_enable"]:
-            return
-
         try:
             resp = _request.send("POST",url=tcloud_url,**kwargs)
         except tmp_except.TemplateInternalException as err:

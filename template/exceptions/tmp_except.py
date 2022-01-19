@@ -16,7 +16,7 @@ error_code = {
 }
 
 class TemplateErrorException(Exception):
-    '''处理updnsgw内部异常'''
+    '''处理内部异常'''
     def __init__(self,code,message):
         self.code = code
         self.message = message
@@ -24,9 +24,16 @@ class TemplateErrorException(Exception):
         return self.message
 
 class TemplateInternalException(Exception):
-    '''处理updnsgw内部异常'''
+    '''处理内部异常'''
     def __init__(self,code,message):
         self.code = code
         self.message = message
     def __str__(self):
         return self.message
+
+class ExtensionLoadError(Exception):
+    """
+    Error of loading provider driver.
+    """
+    def __init__(self,msg=None):
+        self.msg = msg

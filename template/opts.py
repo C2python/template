@@ -24,8 +24,34 @@ auth_opts = [
                 help='Operator Auth Verfiy.'), 
 ]
 
+processor_opts = [
+    cfg.StrOpt('db_url',
+                required=True,
+                help='DB Url.'), 
+    cfg.StrOpt('zk_url',
+                required=True,
+                help='Zookeeper Url.'),
+    cfg.StrOpt('zk_user',
+                help='Zookeeper User.'),
+    cfg.StrOpt('zk_password',
+                help='Zookeeper Password.'),
+    cfg.IntOpt('zk_timeout',
+                default=10,
+                help='Zookeeper Password.'),
+    cfg.IntOpt('template_polling_interval',
+                default=1800,
+                help='Template Polling Interval(s).'),
+    cfg.IntOpt('workers',
+                default=3,
+                help='Domain Polling Interval(s)..'),
+    cfg.StrOpt('backend',
+                default='zk,redis',
+                help='backend.'),
+]
+
 def list_opts():
     return [
         ('api',api_opts),
-        ('auth',auth_opts)
+        ('auth',auth_opts),
+        ('processor',processor_opts)
     ]

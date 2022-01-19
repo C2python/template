@@ -56,9 +56,13 @@ def load_app(conf):
     # 添加银联相关配置
     pl_conf = {
                 'tauth_url': conf.auth.tauth_url, 
-                'oauth_url': conf.auth.oauth_url,
                 'auth_enable': conf.auth.auth_enable
             }
+
+    if conf.auth.auth_enable:
+        pro_name = "template+basic"
+    else:
+        pro_name = "template+noauth"
 
     global_conf = {
         'configkey': configkey,
@@ -66,7 +70,7 @@ def load_app(conf):
 
     LOG.info("WSGI config used: %s", cfg_path)
     return deploy.loadapp("config:" + cfg_path,
-                          name="template+basic",
+                          name=pro_name,
                           global_conf=global_conf)
 
 def app_factory(global_config, **local_conf):
